@@ -240,7 +240,8 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        background: url("assets/images/1000019984.jpg") repeat center center;
+        background-size: 200px auto;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -256,14 +257,14 @@
       }
 
       .lock-container {
-        background: linear-gradient(145deg, #ffffff 0%, #f0fff0 100%);
+        background: transparent;
         padding: 60px 50px;
         border-radius: 40px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        box-shadow: none;
         text-align: center;
         max-width: 450px;
         width: 90%;
-        border: 4px solid #98fb98;
+        border: 3px solid rgba(255, 255, 255, 0.6);
         position: relative;
         overflow: hidden;
       }
@@ -1143,9 +1144,6 @@
     <!-- Lock Screen -->
     <div class="lock-screen" id="lockScreen">
       <div class="lock-container">
-        <div class="lock-icon">🔒</div>
-        <h2>Private Letter</h2>
-        <p>Enter the password to unlock this special message</p>
         <input
           type="password"
           class="password-input"
