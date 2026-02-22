@@ -1040,6 +1040,111 @@
         font-weight: bold;
       }
 
+      /* Valentine Theme Overrides */
+      body.valentine-theme .letter-container {
+        background: linear-gradient(145deg, #ffffff 0%, #fff0f5 100%);
+        border-color: #ff4d6d;
+        box-shadow:
+          0 30px 80px rgba(255, 77, 109, 0.3),
+          inset 0 -2px 10px rgba(255, 77, 109, 0.1);
+      }
+      body.valentine-theme .letter-header {
+        border-bottom-color: #ff4d6d;
+      }
+      body.valentine-theme .letter-header::after {
+        content: "💝";
+      }
+      body.valentine-theme .letter-header h1 {
+        text-shadow: 3px 3px 6px rgba(255, 77, 109, 0.2);
+      }
+      body.valentine-theme .letter-header .date {
+        color: #ff4d6d;
+        text-shadow: 1px 1px 3px rgba(255, 77, 109, 0.2);
+      }
+      body.valentine-theme .highlight {
+        background: linear-gradient(transparent 60%, #ffb8b8 60%);
+      }
+      body.valentine-theme .signature {
+        color: #ff4d6d;
+        text-shadow: 2px 2px 4px rgba(255, 77, 109, 0.2);
+      }
+      body.valentine-theme .decorative-corner {
+        border-color: #ff4d6d;
+      }
+      body.valentine-theme .memory-section h2,
+      body.valentine-theme .love-quotes h2 {
+        text-shadow: 3px 3px 10px rgba(255, 77, 109, 0.4);
+      }
+      body.valentine-theme .memory-card,
+      body.valentine-theme .quote-card {
+        background: linear-gradient(145deg, #ffffff 0%, #fff0f5 100%);
+        border-color: #ff4d6d;
+        box-shadow: 0 10px 30px rgba(255, 77, 109, 0.2);
+      }
+      body.valentine-theme .memory-card::before,
+      body.valentine-theme .quote-card::before {
+        background: radial-gradient(
+          circle at center,
+          rgba(255, 77, 109, 0.1) 0%,
+          transparent 70%
+        );
+      }
+      body.valentine-theme .memory-card:hover,
+      body.valentine-theme .quote-card:hover {
+        box-shadow: 0 15px 40px rgba(255, 77, 109, 0.4);
+      }
+      body.valentine-theme .memory-card h3 {
+        color: #ff4d6d;
+      }
+      body.valentine-theme .quote-text {
+        color: #ff4d6d;
+      }
+      body.valentine-theme .quote-author {
+        color: #ff7675;
+      }
+      body.valentine-theme .footer-heart {
+        filter: drop-shadow(0 5px 15px rgba(255, 77, 109, 0.4));
+      }
+      body.valentine-theme .footer p {
+        color: #ff4d6d;
+        text-shadow: 2px 2px 8px rgba(255, 77, 109, 0.4);
+      }
+      body.valentine-theme .back-button {
+        background: linear-gradient(145deg, #ffffff 0%, #fff0f5 100%);
+        border-color: #ff4d6d;
+        box-shadow: 0 8px 20px rgba(255, 77, 109, 0.3);
+      }
+      body.valentine-theme .back-button:hover {
+        background: #ff4d6d;
+        color: white;
+        box-shadow: 0 12px 25px rgba(255, 77, 109, 0.5);
+      }
+      body.valentine-theme .music-panel {
+        background: linear-gradient(145deg, #ffffff 0%, #fff0f5 100%);
+        border-color: #ff4d6d;
+      }
+      body.valentine-theme .music-toggle {
+        color: #ff4d6d;
+        text-shadow: 0 0 8px rgba(255, 77, 109, 0.6);
+      }
+      body.valentine-theme .music-title {
+        color: #d63031;
+      }
+      body.valentine-theme .volume-slider {
+        background: linear-gradient(to right, #ff4d6d 70%, #ddd 70%);
+      }
+      body.valentine-theme .volume-slider::-webkit-slider-thumb {
+        background: #d63031;
+        border-color: #ff4d6d;
+      }
+      body.valentine-theme .volume-slider::-moz-range-thumb {
+        background: #d63031;
+        border-color: #ff4d6d;
+      }
+      body.valentine-theme .sparkle {
+        background: #ff4d6d;
+      }
+
       @media (max-width: 768px) {
         .choice-title {
           font-size: 36px;
@@ -1471,9 +1576,11 @@
 
         setTimeout(() => {
           if (type === "valentine") {
+            document.body.classList.add("valentine-theme");
             valentineContent.classList.add("visible");
             currentMusic = document.getElementById("valentineMusic");
           } else {
+            document.body.classList.remove("valentine-theme");
             monthsaryContent.classList.add("visible");
             currentMusic = document.getElementById("monthsaryMusic");
           }
@@ -1485,6 +1592,7 @@
           // Set volume from slider
           const vol = document.getElementById("volumeSlider").value;
           if (currentMusic) currentMusic.volume = vol / 100;
+          changeVolume(vol); // Update slider color based on theme
 
           // Show music control and play music
           musicControl.style.display = "flex";
@@ -1506,6 +1614,7 @@
 
         valentineContent.classList.remove("visible");
         monthsaryContent.classList.remove("visible");
+        document.body.classList.remove("valentine-theme");
 
         setTimeout(() => {
           choiceScreen.classList.add("visible");
@@ -1568,7 +1677,10 @@
         }
         // Update slider gradient
         const slider = document.getElementById("volumeSlider");
-        slider.style.background = `linear-gradient(to right, #98fb98 ${val}%, #ddd ${val}%)`;
+        const color = document.body.classList.contains("valentine-theme")
+          ? "#ff4d6d"
+          : "#98fb98";
+        slider.style.background = `linear-gradient(to right, ${color} ${val}%, #ddd ${val}%)`;
         // Update volume icon
         const icon = document.querySelector(".volume-icon");
         if (val == 0) icon.textContent = "🔇";
@@ -1590,7 +1702,10 @@
         const heartsContainer = document.getElementById("heartsContainer");
         const heart = document.createElement("div");
         heart.classList.add("heart");
-        const hearts = ["💚", "💝", "💖", "💕", "❤️"];
+        const isValentine = document.body.classList.contains("valentine-theme");
+        const hearts = isValentine
+          ? ["💝", "💖", "💕", "❤️", "💗"]
+          : ["💚", "💝", "💖", "💕", "❤️"];
         heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
         heart.style.left = Math.random() * 100 + "%";
         heart.style.animationDuration = Math.random() * 10 + 10 + "s";
