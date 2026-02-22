@@ -168,6 +168,8 @@
         cursor: pointer;
         flex-shrink: 0;
         transition: transform 0.2s;
+        color: #98fb98;
+        text-shadow: 0 0 8px rgba(152, 251, 152, 0.6);
       }
 
       .music-toggle:hover {
@@ -1109,8 +1111,8 @@
     <!-- Music Control Panel -->
     <div class="music-panel" id="musicControl" style="display: none">
       <button class="music-toggle" id="musicToggleBtn" onclick="toggleMusic()">
-        <span id="musicIconPause" style="display: none">⏸️</span>
-        <span id="musicIconPlay" style="display: none">▶️</span>
+        <span id="musicIconPause" style="display: none">⏸</span>
+        <span id="musicIconPlay" style="display: none">▶</span>
       </button>
       <div class="music-info">
         <div class="music-title" id="musicTitle">♪ Now Playing</div>
