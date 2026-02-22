@@ -631,8 +631,42 @@
 
       #monthsaryContent {
         min-height: 100vh;
-        background: url('assets/images/image2.jpeg') no-repeat center center fixed;
+        background: url("assets/images/image2.jpeg") no-repeat center center
+          fixed;
         background-size: cover;
+      }
+
+      #monthsaryContent .letter-container {
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      #monthsaryContent .letter-header h1,
+      #monthsaryContent .letter-header .date,
+      #monthsaryContent .letter-body,
+      #monthsaryContent .letter-body p,
+      #monthsaryContent .signature {
+        color: white;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      #monthsaryContent .highlight {
+        background: linear-gradient(
+          transparent 60%,
+          rgba(152, 251, 152, 0.5) 60%
+        );
+        color: white;
+      }
+
+      #monthsaryContent .letter-header {
+        border-bottom-color: rgba(255, 255, 255, 0.4);
+      }
+
+      #monthsaryContent .letter-header::after {
+        background: transparent;
       }
 
       .back-button {
