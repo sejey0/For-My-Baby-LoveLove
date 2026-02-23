@@ -301,40 +301,10 @@
         visibility: visible;
       }
 
-      .choice-container {
-        text-align: center;
-        max-width: 1000px;
-        width: 90%;
-        padding: 20px;
-      }
-
-      .choice-title {
-        color: white;
-        font-size: 48px;
-        margin-bottom: 20px;
-        text-shadow: 3px 3px 10px rgba(152, 251, 152, 0.6);
-        animation: fadeInDown 0.8s;
-        background: linear-gradient(90deg, #ffffff, #98fb98, #ffffff);
-        background-size: 200% auto;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation:
-          textShine 3s linear infinite,
-          fadeInDown 0.8s;
-      }
-
       @keyframes textShine {
         to {
           background-position: 200% center;
         }
-      }
-
-      .choice-subtitle {
-        color: #98fb98;
-        font-size: 22px;
-        margin-bottom: 60px;
-        animation: fadeInDown 1s;
-        text-shadow: 2px 2px 8px rgba(152, 251, 152, 0.3);
       }
 
       @keyframes fadeInDown {
@@ -348,90 +318,6 @@
         }
       }
 
-      .choice-cards {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 40px;
-        margin-bottom: 30px;
-      }
-
-      .choice-card {
-        background: linear-gradient(145deg, #ffffff 0%, #f0fff0 100%);
-        padding: 50px 35px;
-        border-radius: 35px;
-        border: 4px solid #98fb98;
-        cursor: pointer;
-        transition: all 0.4s;
-        animation: fadeInUp 0.8s;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 15px 40px rgba(152, 251, 152, 0.3);
-      }
-
-      .choice-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(152, 251, 152, 0.3),
-          transparent
-        );
-        transition: left 0.5s;
-      }
-
-      .choice-card:hover::before {
-        left: 100%;
-      }
-
-      .choice-card::after {
-        content: "";
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(
-          circle,
-          rgba(152, 251, 152, 0.1) 0%,
-          transparent 70%
-        );
-        opacity: 0;
-        transition: opacity 0.3s;
-      }
-
-      .choice-card:hover::after {
-        opacity: 1;
-        animation: rotate 10s linear infinite;
-      }
-
-      @keyframes rotate {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      .choice-card:hover {
-        transform: translateY(-15px) scale(1.05);
-        box-shadow: 0 25px 60px rgba(152, 251, 152, 0.6);
-        border-color: #7fe5a5;
-      }
-
-      .choice-card:nth-child(1) {
-        animation-delay: 0.2s;
-      }
-
-      .choice-card:nth-child(2) {
-        animation-delay: 0.4s;
-      }
-
       @keyframes fadeInUp {
         from {
           opacity: 0;
@@ -441,63 +327,6 @@
           opacity: 1;
           transform: translateY(0);
         }
-      }
-
-      .choice-icon {
-        font-size: 90px;
-        margin-bottom: 25px;
-        display: block;
-        animation: bounce 2s infinite;
-        position: relative;
-        z-index: 1;
-        filter: drop-shadow(0 5px 15px rgba(152, 251, 152, 0.3));
-      }
-
-      @keyframes bounce {
-        0%,
-        100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-15px);
-        }
-      }
-
-      .choice-card h3 {
-        color: #1a1a1a;
-        font-size: 32px;
-        margin-bottom: 20px;
-        position: relative;
-        z-index: 1;
-        text-shadow: 1px 1px 3px rgba(152, 251, 152, 0.2);
-      }
-
-      .choice-card p {
-        color: #666;
-        font-size: 17px;
-        line-height: 1.7;
-        position: relative;
-        z-index: 1;
-      }
-
-      .choice-badge {
-        display: inline-block;
-        background: linear-gradient(135deg, #98fb98 0%, #7fe5a5 100%);
-        color: #1a1a1a;
-        padding: 12px 28px;
-        border-radius: 25px;
-        font-size: 16px;
-        font-weight: bold;
-        margin-top: 20px;
-        position: relative;
-        z-index: 1;
-        box-shadow: 0 5px 15px rgba(152, 251, 152, 0.4);
-        transition: all 0.3s;
-      }
-
-      .choice-card:hover .choice-badge {
-        transform: scale(1.1);
-        box-shadow: 0 8px 20px rgba(152, 251, 152, 0.6);
       }
 
       /* Main Content */
@@ -1367,26 +1196,328 @@
 
     <!-- Choice Screen -->
     <div class="choice-screen" id="choiceScreen">
-      <div class="choice-container">
-        <h1 class="choice-title">My Love, Choose Your Letter 💚</h1>
-        <p class="choice-subtitle">
+      <!-- Ambient glow blobs -->
+      <div
+        class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full pointer-events-none"
+        style="
+          background: radial-gradient(
+            circle,
+            rgba(152, 251, 152, 0.08) 0%,
+            transparent 70%
+          );
+          filter: blur(60px);
+        "
+      ></div>
+      <div
+        class="absolute bottom-1/4 right-1/4 w-72 h-72 rounded-full pointer-events-none"
+        style="
+          background: radial-gradient(
+            circle,
+            rgba(152, 251, 152, 0.08) 0%,
+            transparent 70%
+          );
+          filter: blur(60px);
+        "
+      ></div>
+
+      <div class="relative z-10 text-center max-w-4xl w-[90%] px-4 py-8">
+        <!-- Decorative top line -->
+        <div
+          class="flex items-center justify-center gap-3 mb-8"
+          style="animation: fadeInDown 0.6s both"
+        >
+          <div
+            class="h-px w-16"
+            style="background: linear-gradient(to right, transparent, #98fb98)"
+          ></div>
+          <span
+            class="text-[#98fb98] text-sm tracking-[0.3em] uppercase font-semibold opacity-70"
+            >A letter for you</span
+          >
+          <div
+            class="h-px w-16"
+            style="background: linear-gradient(to left, transparent, #98fb98)"
+          ></div>
+        </div>
+
+        <!-- Title -->
+        <h1
+          class="text-5xl md:text-6xl font-bold mb-5 leading-tight"
+          style="
+            background: linear-gradient(
+              90deg,
+              #ffffff 0%,
+              #98fb98 50%,
+              #ffffff 100%
+            );
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation:
+              textShine 3s linear infinite,
+              fadeInDown 0.8s both;
+          "
+        >
+          My Love, Choose Your Letter 💚
+        </h1>
+
+        <!-- Subtitle -->
+        <p
+          class="text-lg md:text-xl mb-14 max-w-lg mx-auto leading-relaxed"
+          style="
+            color: rgba(152, 251, 152, 0.8);
+            animation: fadeInDown 1s both;
+            text-shadow: 0 0 30px rgba(152, 251, 152, 0.2);
+          "
+        >
           I've written two special messages for you. Which would you like to
           read first?
         </p>
 
-        <div class="choice-cards">
-          <div class="choice-card">
-            <h3>Valentine's Letter</h3>
-            <span class="choice-badge" onclick="showLetter('valentine')"
-              >Read Valentine's</span
+        <!-- Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+          <!-- Valentine's Card -->
+          <div
+            class="group relative rounded-[2rem] p-8 md:p-10 overflow-hidden cursor-pointer text-left"
+            style="
+              background: rgba(255, 255, 255, 0.04);
+              border: 1px solid rgba(152, 251, 152, 0.25);
+              backdrop-filter: blur(12px);
+              transition:
+                transform 0.4s ease,
+                box-shadow 0.4s ease,
+                border-color 0.4s ease;
+              animation: fadeInUp 0.8s 0.2s both;
+            "
+            onmouseover="
+              this.style.transform = 'translateY(-10px) scale(1.02)';
+              this.style.boxShadow = '0 30px 70px rgba(152,251,152,0.2)';
+              this.style.borderColor = 'rgba(152,251,152,0.6)';
+            "
+            onmouseout="
+              this.style.transform = '';
+              this.style.boxShadow = '';
+              this.style.borderColor = 'rgba(152,251,152,0.25)';
+            "
+          >
+            <!-- Shimmer sweep -->
+            <div
+              class="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              style="
+                background: linear-gradient(
+                  105deg,
+                  transparent 40%,
+                  rgba(152, 251, 152, 0.06) 50%,
+                  transparent 60%
+                );
+              "
+            ></div>
+
+            <!-- Corner accent -->
+            <div
+              class="absolute top-0 right-0 w-24 h-24 pointer-events-none"
+              style="
+                background: radial-gradient(
+                  circle at top right,
+                  rgba(152, 251, 152, 0.12),
+                  transparent 70%
+                );
+              "
+            ></div>
+
+            <!-- Emoji -->
+            <span
+              class="text-6xl block mb-5"
+              style="
+                filter: drop-shadow(0 4px 16px rgba(152, 251, 152, 0.5));
+                transition: transform 0.3s;
+                transform: translateY(0);
+              "
+              onmouseover="this.style.transform = 'translateY(-6px)'"
+              onmouseout="this.style.transform = 'translateY(0)'"
+              >💌</span
             >
+
+            <!-- Label badge -->
+            <span
+              class="inline-block text-xs font-bold tracking-widest uppercase mb-3 px-3 py-1 rounded-full"
+              style="
+                color: #98fb98;
+                background: rgba(152, 251, 152, 0.1);
+                border: 1px solid rgba(152, 251, 152, 0.3);
+              "
+              >Letter 01</span
+            >
+
+            <h3 class="text-white text-2xl md:text-3xl font-bold mb-2">
+              Valentine's Letter
+            </h3>
+            <p
+              class="text-sm md:text-base mb-8"
+              style="color: rgba(255, 255, 255, 0.45); line-height: 1.6"
+            >
+              A heartfelt message written just for our Valentine's Day.
+            </p>
+
+            <button
+              onclick="showLetter('valentine')"
+              class="inline-flex items-center gap-2 font-bold py-3 px-7 rounded-full text-sm md:text-base transition-all duration-300 cursor-pointer border-0 w-full justify-center"
+              style="
+                background: linear-gradient(135deg, #98fb98 0%, #7fe5a5 100%);
+                color: #1a1a1a;
+                box-shadow:
+                  0 4px 20px rgba(152, 251, 152, 0.3),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.3);
+              "
+              onmouseover="
+                this.style.transform = 'scale(1.05)';
+                this.style.boxShadow =
+                  '0 8px 30px rgba(152,251,152,0.55), inset 0 1px 0 rgba(255,255,255,0.3)';
+              "
+              onmouseout="
+                this.style.transform = '';
+                this.style.boxShadow =
+                  '0 4px 20px rgba(152,251,152,0.3), inset 0 1px 0 rgba(255,255,255,0.3)';
+              "
+            >
+              Read Valentine's
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </button>
           </div>
 
-          <div class="choice-card">
-            <h3>Monthsary Letter</h3>
-            <span class="choice-badge" onclick="showLetter('monthsary')"
-              >Read Monthsary</span
+          <!-- Monthsary Card -->
+          <div
+            class="group relative rounded-[2rem] p-8 md:p-10 overflow-hidden cursor-pointer text-left"
+            style="
+              background: rgba(255, 255, 255, 0.04);
+              border: 1px solid rgba(152, 251, 152, 0.25);
+              backdrop-filter: blur(12px);
+              transition:
+                transform 0.4s ease,
+                box-shadow 0.4s ease,
+                border-color 0.4s ease;
+              animation: fadeInUp 0.8s 0.4s both;
+            "
+            onmouseover="
+              this.style.transform = 'translateY(-10px) scale(1.02)';
+              this.style.boxShadow = '0 30px 70px rgba(152,251,152,0.2)';
+              this.style.borderColor = 'rgba(152,251,152,0.6)';
+            "
+            onmouseout="
+              this.style.transform = '';
+              this.style.boxShadow = '';
+              this.style.borderColor = 'rgba(152,251,152,0.25)';
+            "
+          >
+            <!-- Shimmer sweep -->
+            <div
+              class="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              style="
+                background: linear-gradient(
+                  105deg,
+                  transparent 40%,
+                  rgba(152, 251, 152, 0.06) 50%,
+                  transparent 60%
+                );
+              "
+            ></div>
+
+            <!-- Corner accent -->
+            <div
+              class="absolute top-0 right-0 w-24 h-24 pointer-events-none"
+              style="
+                background: radial-gradient(
+                  circle at top right,
+                  rgba(152, 251, 152, 0.12),
+                  transparent 70%
+                );
+              "
+            ></div>
+
+            <!-- Emoji -->
+            <span
+              class="text-6xl block mb-5"
+              style="
+                filter: drop-shadow(0 4px 16px rgba(152, 251, 152, 0.5));
+                transition: transform 0.3s;
+                transform: translateY(0);
+              "
+              onmouseover="this.style.transform = 'translateY(-6px)'"
+              onmouseout="this.style.transform = 'translateY(0)'"
+              >💚</span
             >
+
+            <!-- Label badge -->
+            <span
+              class="inline-block text-xs font-bold tracking-widest uppercase mb-3 px-3 py-1 rounded-full"
+              style="
+                color: #98fb98;
+                background: rgba(152, 251, 152, 0.1);
+                border: 1px solid rgba(152, 251, 152, 0.3);
+              "
+              >Letter 02</span
+            >
+
+            <h3 class="text-white text-2xl md:text-3xl font-bold mb-2">
+              Monthsary Letter
+            </h3>
+            <p
+              class="text-sm md:text-base mb-8"
+              style="color: rgba(255, 255, 255, 0.45); line-height: 1.6"
+            >
+              A special message celebrating our 7th month together.
+            </p>
+
+            <button
+              onclick="showLetter('monthsary')"
+              class="inline-flex items-center gap-2 font-bold py-3 px-7 rounded-full text-sm md:text-base transition-all duration-300 cursor-pointer border-0 w-full justify-center"
+              style="
+                background: linear-gradient(135deg, #98fb98 0%, #7fe5a5 100%);
+                color: #1a1a1a;
+                box-shadow:
+                  0 4px 20px rgba(152, 251, 152, 0.3),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.3);
+              "
+              onmouseover="
+                this.style.transform = 'scale(1.05)';
+                this.style.boxShadow =
+                  '0 8px 30px rgba(152,251,152,0.55), inset 0 1px 0 rgba(255,255,255,0.3)';
+              "
+              onmouseout="
+                this.style.transform = '';
+                this.style.boxShadow =
+                  '0 4px 20px rgba(152,251,152,0.3), inset 0 1px 0 rgba(255,255,255,0.3)';
+              "
+            >
+              Read Monthsary
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
