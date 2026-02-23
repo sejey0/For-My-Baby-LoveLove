@@ -351,39 +351,6 @@
         background-size: cover;
       }
 
-      #monthsaryContent .letter-container {
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-      }
-
-      #monthsaryContent .letter-header h1,
-      #monthsaryContent .letter-header .date,
-      #monthsaryContent .letter-body,
-      #monthsaryContent .letter-body p,
-      #monthsaryContent .signature {
-        color: white;
-        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
-      }
-
-      #monthsaryContent .highlight {
-        background: linear-gradient(
-          transparent 60%,
-          rgba(152, 251, 152, 0.5) 60%
-        );
-        color: white;
-      }
-
-      #monthsaryContent .letter-header {
-        border-bottom-color: rgba(255, 255, 255, 0.4);
-      }
-
-      #monthsaryContent .letter-header::after {
-        background: transparent;
-      }
-
       .back-button {
         position: fixed;
         top: 30px;
@@ -1606,84 +1573,292 @@
 
     <!-- Monthsary Content -->
     <div class="content" id="monthsaryContent">
-      <button class="back-button" onclick="backToChoice()">
-        ← Back to Menu
+      <!-- Dark overlay for readability over background image -->
+      <div
+        class="fixed inset-0 z-0 pointer-events-none"
+        style="background: rgba(0, 0, 0, 0.55)"
+      ></div>
+
+      <!-- Back Button -->
+      <button
+        onclick="backToChoice()"
+        class="fixed top-6 left-6 z-[100] inline-flex items-center gap-2 font-bold py-3 px-5 rounded-2xl text-sm transition-all duration-300 cursor-pointer border-0"
+        style="
+          background: rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(152, 251, 152, 0.4);
+          color: white;
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+        "
+        onmouseover="
+          this.style.background = 'rgba(152,251,152,0.2)';
+          this.style.transform = 'translateY(-2px)';
+          this.style.boxShadow = '0 8px 25px rgba(152,251,152,0.3)';
+        "
+        onmouseout="
+          this.style.background = 'rgba(255,255,255,0.08)';
+          this.style.transform = '';
+          this.style.boxShadow = '0 4px 20px rgba(0,0,0,0.35)';
+        "
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M19 12H5" />
+          <path d="m12 19-7-7 7-7" />
+        </svg>
+        Back to Menu
       </button>
 
-      <div class="letter-container">
-        <div class="decorative-corner corner-tl"></div>
-        <div class="decorative-corner corner-tr"></div>
-        <div class="decorative-corner corner-bl"></div>
-        <div class="decorative-corner corner-br"></div>
+      <!-- Scrollable page content -->
+      <div class="relative z-10 px-4 pb-16 pt-28">
+        <!-- Letter card -->
+        <div
+          class="max-w-3xl mx-auto relative rounded-[2.5rem] overflow-hidden"
+          style="
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s both;
+          "
+        >
+          <!-- Corner accents -->
+          <div
+            class="absolute top-6 left-6 w-14 h-14 pointer-events-none"
+            style="
+              border-left: 2px solid rgba(152, 251, 152, 0.55);
+              border-top: 2px solid rgba(152, 251, 152, 0.55);
+              border-radius: 6px 0 0 0;
+            "
+          ></div>
+          <div
+            class="absolute top-6 right-6 w-14 h-14 pointer-events-none"
+            style="
+              border-right: 2px solid rgba(152, 251, 152, 0.55);
+              border-top: 2px solid rgba(152, 251, 152, 0.55);
+              border-radius: 0 6px 0 0;
+            "
+          ></div>
+          <div
+            class="absolute bottom-6 left-6 w-14 h-14 pointer-events-none"
+            style="
+              border-left: 2px solid rgba(152, 251, 152, 0.55);
+              border-bottom: 2px solid rgba(152, 251, 152, 0.55);
+              border-radius: 0 0 0 6px;
+            "
+          ></div>
+          <div
+            class="absolute bottom-6 right-6 w-14 h-14 pointer-events-none"
+            style="
+              border-right: 2px solid rgba(152, 251, 152, 0.55);
+              border-bottom: 2px solid rgba(152, 251, 152, 0.55);
+              border-radius: 0 0 6px 0;
+            "
+          ></div>
 
-        <div class="letter-header">
-          <h1>To My Dearest Love 💚</h1>
-          <p class="date">Happy Monthsary!</p>
-        </div>
+          <!-- Ambient glow -->
+          <div
+            class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-48 pointer-events-none"
+            style="
+              background: radial-gradient(
+                ellipse,
+                rgba(152, 251, 152, 0.07) 0%,
+                transparent 70%
+              );
+              filter: blur(30px);
+            "
+          ></div>
 
-        <div class="letter-body">
-          <p>My Beloved,</p>
-
-          <p>
-            As another beautiful month passes with you by my side, I find myself
-            overwhelmed with gratitude and love.
-            <span class="highlight"
-              >Every moment with you feels like a dream</span
+          <div class="px-8 py-12 sm:px-14 sm:py-16">
+            <!-- Header -->
+            <div
+              class="text-center pb-10 mb-10"
+              style="border-bottom: 1px solid rgba(255, 255, 255, 0.18)"
             >
-            I never want to wake up from. You've brought colors into my world
-            that I never knew existed, and your love has made me believe in
-            magic again.
-          </p>
+              <span
+                class="inline-block text-xs font-bold tracking-widest uppercase mb-5 px-4 py-1.5 rounded-full"
+                style="
+                  color: #98fb98;
+                  background: rgba(152, 251, 152, 0.1);
+                  border: 1px solid rgba(152, 251, 152, 0.3);
+                "
+                >7th Monthsary</span
+              >
+              <h1
+                class="text-4xl sm:text-5xl font-bold mb-4 leading-tight"
+                style="
+                  color: white;
+                  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.6);
+                  animation: fadeIn 1s both;
+                "
+              >
+                To My Dearest Love 💚
+              </h1>
+              <p
+                class="text-lg font-semibold italic"
+                style="
+                  color: #98fb98;
+                  text-shadow: 0 0 20px rgba(152, 251, 152, 0.5);
+                "
+              >
+                Happy Monthsary!
+              </p>
+              <div
+                class="mt-4 text-2xl"
+                style="animation: heartbeat 1.5s infinite"
+              >
+                💚
+              </div>
+            </div>
 
-          <p>
-            From the first time our eyes met to this very moment, you've been
-            the melody my heart dances to. Your smile brightens even my darkest
-            days, and your laughter is the sweetest sound I've ever heard.
-            <span class="highlight"
-              >You make me want to be better, to love deeper, to cherish
-              more</span
-            >.
-          </p>
+            <!-- Letter body -->
+            <div
+              class="text-base sm:text-lg leading-[1.95] text-justify space-y-6"
+              style="
+                color: rgba(255, 255, 255, 0.9);
+                text-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+              "
+            >
+              <p style="animation: fadeIn 1s 0.2s both"><em>My Beloved,</em></p>
 
-          <p>
-            Thank you for choosing me every single day. Thank you for your
-            patience when I'm difficult, for your understanding when I'm
-            confused, and for your unwavering support through everything.
-            <span class="highlight"
-              >You are my safe haven, my greatest adventure, and my home</span
-            >.
-          </p>
+              <p style="animation: fadeIn 1s 0.4s both">
+                As another beautiful month passes with you by my side, I find
+                myself overwhelmed with gratitude and love.
+                <span
+                  class="font-bold"
+                  style="
+                    background: linear-gradient(
+                      transparent 58%,
+                      rgba(152, 251, 152, 0.4) 58%
+                    );
+                    padding: 2px 5px;
+                    border-radius: 3px;
+                  "
+                  >Every moment with you feels like a dream</span
+                >
+                I never want to wake up from. You've brought colors into my
+                world that I never knew existed, and your love has made me
+                believe in magic again.
+              </p>
 
-          <p>
-            This month has been another chapter in our beautiful story, filled
-            with laughter, growth, and endless love. Each day with you adds
-            another precious memory to our collection, another reason to smile,
-            another proof that soulmates do exist.
-          </p>
+              <p style="animation: fadeIn 1s 0.6s both">
+                From the first time our eyes met to this very moment, you've
+                been the melody my heart dances to. Your smile brightens even my
+                darkest days, and your laughter is the sweetest sound I've ever
+                heard.
+                <span
+                  class="font-bold"
+                  style="
+                    background: linear-gradient(
+                      transparent 58%,
+                      rgba(152, 251, 152, 0.4) 58%
+                    );
+                    padding: 2px 5px;
+                    border-radius: 3px;
+                  "
+                  >You make me want to be better, to love deeper, to cherish
+                  more</span
+                >.
+              </p>
 
-          <p>
-            I promise to continue writing this story with you, page by page,
-            month by month, forever and always. I promise to love you on your
-            good days and your bad days, when you're easy to love and when
-            you're not, because that's what real love is.
-          </p>
+              <p style="animation: fadeIn 1s 0.8s both">
+                Thank you for choosing me every single day. Thank you for your
+                patience when I'm difficult, for your understanding when I'm
+                confused, and for your unwavering support through everything.
+                <span
+                  class="font-bold"
+                  style="
+                    background: linear-gradient(
+                      transparent 58%,
+                      rgba(152, 251, 152, 0.4) 58%
+                    );
+                    padding: 2px 5px;
+                    border-radius: 3px;
+                  "
+                  >You are my safe haven, my greatest adventure, and my
+                  home</span
+                >.
+              </p>
 
-          <p>
-            Here's to us, to our love, and to many more months together. I love
-            you more than words could ever express, and I fall for you a little
-            more with each passing day.
-          </p>
+              <p style="animation: fadeIn 1s 1s both">
+                This month has been another chapter in our beautiful story,
+                filled with laughter, growth, and endless love. Each day with
+                you adds another precious memory to our collection, another
+                reason to smile, another proof that soulmates do exist.
+              </p>
 
-          <div class="signature">
-            Forever Yours,<br />
-            With All My Love 💚
+              <p style="animation: fadeIn 1s 1.2s both">
+                I promise to continue writing this story with you, page by page,
+                month by month, forever and always. I promise to love you on
+                your good days and your bad days, when you're easy to love and
+                when you're not, because that's what real love is.
+              </p>
+
+              <p style="animation: fadeIn 1s 1.4s both">
+                Here's to us, to our love, and to many more months together. I
+                love you more than words could ever express, and I fall for you
+                a little more with each passing day.
+              </p>
+
+              <!-- Signature -->
+              <div
+                class="pt-8 text-right"
+                style="
+                  border-top: 1px solid rgba(255, 255, 255, 0.15);
+                  animation: fadeIn 1s 1.6s both;
+                "
+              >
+                <p
+                  class="text-xl sm:text-2xl italic font-semibold"
+                  style="
+                    color: #98fb98;
+                    text-shadow: 0 0 20px rgba(152, 251, 152, 0.5);
+                    line-height: 1.8;
+                  "
+                >
+                  Forever Yours,<br />
+                  With All My Love 💚
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="footer">
-        <div class="footer-heart">💚</div>
-        <p>I Love You More Every Day</p>
+        <!-- Footer -->
+        <div
+          class="text-center pt-14 pb-4"
+          style="animation: fadeIn 1s 2s both"
+        >
+          <div
+            class="text-6xl sm:text-7xl mb-4"
+            style="
+              animation: heartbeat 1.5s infinite;
+              filter: drop-shadow(0 5px 15px rgba(152, 251, 152, 0.55));
+            "
+          >
+            💚
+          </div>
+          <p
+            class="text-xl sm:text-2xl font-bold"
+            style="
+              color: #98fb98;
+              text-shadow: 2px 2px 10px rgba(152, 251, 152, 0.55);
+            "
+          >
+            I Love You More Every Day
+          </p>
+        </div>
       </div>
     </div>
 
