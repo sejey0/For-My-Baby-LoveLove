@@ -4,6 +4,38 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happy 7th Monthsary lovelove</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        corePlugins: {
+          preflight: false,
+        },
+        theme: {
+          extend: {
+            colors: {
+              mint: "#98fb98",
+              mintDark: "#7fe5a5",
+              forest: "#2d6a4f",
+            },
+            keyframes: {
+              lockShake: {
+                "0%, 100%": { transform: "rotate(0deg)" },
+                "25%": { transform: "rotate(-8deg)" },
+                "75%": { transform: "rotate(8deg)" },
+              },
+              lockPulse: {
+                "0%, 100%": { transform: "scale(1)", opacity: "0.6" },
+                "50%": { transform: "scale(1.05)", opacity: "1" },
+              },
+            },
+            animation: {
+              lockShake: "lockShake 3s infinite",
+              lockPulse: "lockPulse 2s ease-in-out infinite",
+            },
+          },
+        },
+      };
+    </script>
     <style>
       * {
         margin: 0;
@@ -235,156 +267,10 @@
         border: 2px solid #98fb98;
       }
 
-      /* Lock Screen */
-      .lock-screen {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: url("assets/images/1000019984.jpg") repeat center center;
-        background-size: 200px auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 1000;
-        transition:
-          opacity 0.5s,
-          visibility 0.5s;
-      }
-
-      .lock-screen.hidden {
+      /* Lock Screen - minimal custom CSS for Tailwind overrides */
+      .lock-screen.lock-hidden {
         opacity: 0;
         visibility: hidden;
-      }
-
-      .lock-container {
-        background: rgba(255, 255, 255, 0.03);
-        backdrop-filter: blur(1px);
-        -webkit-backdrop-filter: blur(1px);
-        padding: 60px 50px;
-        border-radius: 40px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-        text-align: center;
-        max-width: 450px;
-        width: 90%;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        position: relative;
-        overflow: hidden;
-      }
-
-      .lock-icon {
-        font-size: 90px;
-        margin-bottom: 25px;
-        animation: lockShake 3s infinite;
-        position: relative;
-        z-index: 1;
-        filter: drop-shadow(0 5px 10px rgba(152, 251, 152, 0.3));
-      }
-
-      @keyframes lockShake {
-        0%,
-        100% {
-          transform: rotate(0deg);
-        }
-        25% {
-          transform: rotate(-8deg);
-        }
-        75% {
-          transform: rotate(8deg);
-        }
-      }
-
-      .lock-container h2 {
-        color: #1a1a1a;
-        margin-bottom: 15px;
-        font-size: 32px;
-        position: relative;
-        z-index: 1;
-        text-shadow: 2px 2px 4px rgba(152, 251, 152, 0.2);
-      }
-
-      .lock-container p {
-        color: #666;
-        margin-bottom: 35px;
-        font-size: 17px;
-        position: relative;
-        z-index: 1;
-      }
-
-      .password-input {
-        width: 100%;
-        padding: 18px;
-        border: 3px solid #98fb98;
-        border-radius: 20px;
-        font-size: 20px;
-        text-align: center;
-        margin-bottom: 25px;
-        transition: all 0.3s;
-        letter-spacing: 6px;
-        position: relative;
-        z-index: 1;
-        background: white;
-      }
-
-      .password-input:focus {
-        outline: none;
-        border-color: #7fe5a5;
-        box-shadow: 0 0 25px rgba(152, 251, 152, 0.5);
-        transform: scale(1.02);
-      }
-
-      .unlock-btn {
-        width: 100%;
-        padding: 18px;
-        background: linear-gradient(135deg, #98fb98 0%, #7fe5a5 100%);
-        border: none;
-        border-radius: 20px;
-        color: #1a1a1a;
-        font-size: 20px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s;
-        box-shadow: 0 8px 20px rgba(152, 251, 152, 0.4);
-        position: relative;
-        z-index: 1;
-        overflow: hidden;
-      }
-
-      .unlock-btn::before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.5);
-        transform: translate(-50%, -50%);
-        transition:
-          width 0.6s,
-          height 0.6s;
-      }
-
-      .unlock-btn:hover::before {
-        width: 300px;
-        height: 300px;
-      }
-
-      .unlock-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 12px 30px rgba(152, 251, 152, 0.6);
-      }
-
-      .error-msg {
-        color: #ff4444;
-        font-size: 15px;
-        margin-top: 15px;
-        opacity: 0;
-        transition: opacity 0.3s;
-        position: relative;
-        z-index: 1;
-        font-weight: bold;
       }
 
       .error-msg.show {
@@ -1290,22 +1176,63 @@
       />
     </audio>
 
-    <!-- Lock Screen -->
-    <div class="lock-screen" id="lockScreen">
-      <div class="lock-container">
+    <!-- Lock Screen (Tailwind CSS) -->
+    <div
+      class="lock-screen fixed inset-0 w-full h-full flex items-center justify-center z-[1000] transition-all duration-500"
+      id="lockScreen"
+      style="
+        background: url(&quot;assets/images/1000019984.jpg&quot;) repeat center
+          center;
+        background-size: 200px auto;
+      "
+    >
+      <div
+        class="relative overflow-hidden max-w-[450px] w-[90%] bg-white/[0.03] backdrop-blur-sm px-10 py-14 sm:px-12 sm:py-16 rounded-[40px] shadow-[0_8px_32px_rgba(0,0,0,0.2)] text-center border border-white/30"
+      >
+        <!-- Title -->
+        <h2
+          class="text-[#1a1a1a] mb-3 text-2xl sm:text-[32px] font-bold relative z-[1] [text-shadow:2px_2px_4px_rgba(152,251,152,0.2)]"
+        >
+          Welcome, My Love 💚
+        </h2>
+
+        <!-- Subtitle -->
+        <p class="text-gray-500 mb-8 text-base sm:text-[17px] relative z-[1]">
+          Enter our secret password to continue
+        </p>
+
+        <!-- Password Input -->
         <input
           type="password"
-          class="password-input"
+          class="w-full p-[18px] border-[3px] border-mint rounded-[20px] text-xl text-center mb-6 tracking-[6px] relative z-[1] bg-white transition-all duration-300 outline-none focus:border-mintDark focus:shadow-[0_0_25px_rgba(152,251,152,0.5)] focus:scale-[1.02] placeholder:tracking-normal placeholder:text-gray-400"
           id="passwordInput"
           placeholder="Enter Password"
           maxlength="20"
         />
-        <button class="unlock-btn" onclick="checkPassword()">
-          <span style="position: relative; z-index: 1">Unlock 💚</span>
+
+        <!-- Unlock Button -->
+        <button
+          class="group w-full p-[18px] bg-gradient-to-br from-mint to-mintDark border-none rounded-[20px] text-[#1a1a1a] text-xl font-bold cursor-pointer transition-all duration-300 shadow-[0_8px_20px_rgba(152,251,152,0.4)] relative z-[1] overflow-hidden hover:-translate-y-[3px] hover:shadow-[0_12px_30px_rgba(152,251,152,0.6)] active:translate-y-0"
+          onclick="checkPassword()"
+        >
+          <span
+            class="absolute inset-0 flex items-center justify-center rounded-full bg-white/50 w-0 h-0 m-auto transition-all duration-500 group-hover:w-[300px] group-hover:h-[300px]"
+          ></span>
+          <span class="relative z-[1]">Unlock 💚</span>
         </button>
-        <div class="error-msg" id="errorMsg">
+
+        <!-- Error Message -->
+        <div
+          class="error-msg text-red-500 text-[15px] mt-4 opacity-0 transition-opacity duration-300 relative z-[1] font-bold"
+          id="errorMsg"
+        >
           Incorrect password. Try again! 💔
         </div>
+
+        <!-- Decorative glow ring -->
+        <div
+          class="absolute -inset-1 rounded-[40px] bg-gradient-to-br from-mint/20 to-transparent -z-10 blur-xl animate-lockPulse pointer-events-none"
+        ></div>
       </div>
     </div>
 
@@ -1513,7 +1440,7 @@
 
         // Change 'iloveyou' to whatever password you want
         if (password.toLowerCase() === "iloveyou" || password === "143") {
-          lockScreen.classList.add("hidden");
+          lockScreen.classList.add("lock-hidden");
           setTimeout(() => {
             choiceScreen.classList.add("visible");
           }, 500);
