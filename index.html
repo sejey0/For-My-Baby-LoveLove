@@ -1200,17 +1200,74 @@
         <p
           class="text-mint mb-8 text-base sm:text-[17px] relative z-[1] [text-shadow:0_0_12px_rgba(152,251,152,0.6),_0_1px_4px_rgba(0,0,0,0.5)] opacity-90"
         >
-          Enter our secret password to continue
+          When is our Monthsary / Anniversary? 💚
         </p>
 
-        <!-- Password Input -->
-        <input
-          type="password"
-          class="w-full p-[18px] border-[3px] border-mint rounded-[20px] text-xl text-center mb-6 tracking-[6px] relative z-[1] bg-white transition-all duration-300 outline-none focus:border-mintDark focus:shadow-[0_0_25px_rgba(152,251,152,0.5)] focus:scale-[1.02] placeholder:tracking-normal placeholder:text-gray-400"
-          id="passwordInput"
-          placeholder="Enter Password"
-          maxlength="20"
-        />
+        <!-- PIN Input -->
+        <div class="relative z-[1] mb-6">
+          <!-- Hidden real input (captures keyboard) -->
+          <input
+            type="password"
+            inputmode="numeric"
+            id="passwordInput"
+            maxlength="6"
+            autocomplete="off"
+            class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+            oninput="syncPinDots()"
+            placeholder=""
+          />
+          <!-- PIN dot boxes -->
+          <div class="flex justify-center gap-3" id="pinBoxes">
+            <div
+              class="pin-box w-12 h-14 rounded-[14px] border-[3px] border-mint bg-white/10 flex items-center justify-center transition-all duration-200"
+              id="pin0"
+            >
+              <div
+                class="pin-dot w-3 h-3 rounded-full bg-transparent transition-all duration-200"
+              ></div>
+            </div>
+            <div
+              class="pin-box w-12 h-14 rounded-[14px] border-[3px] border-mint bg-white/10 flex items-center justify-center transition-all duration-200"
+              id="pin1"
+            >
+              <div
+                class="pin-dot w-3 h-3 rounded-full bg-transparent transition-all duration-200"
+              ></div>
+            </div>
+            <div
+              class="pin-box w-12 h-14 rounded-[14px] border-[3px] border-mint bg-white/10 flex items-center justify-center transition-all duration-200"
+              id="pin2"
+            >
+              <div
+                class="pin-dot w-3 h-3 rounded-full bg-transparent transition-all duration-200"
+              ></div>
+            </div>
+            <div
+              class="pin-box w-12 h-14 rounded-[14px] border-[3px] border-mint bg-white/10 flex items-center justify-center transition-all duration-200"
+              id="pin3"
+            >
+              <div
+                class="pin-dot w-3 h-3 rounded-full bg-transparent transition-all duration-200"
+              ></div>
+            </div>
+            <div
+              class="pin-box w-12 h-14 rounded-[14px] border-[3px] border-mint bg-white/10 flex items-center justify-center transition-all duration-200"
+              id="pin4"
+            >
+              <div
+                class="pin-dot w-3 h-3 rounded-full bg-transparent transition-all duration-200"
+              ></div>
+            </div>
+            <div
+              class="pin-box w-12 h-14 rounded-[14px] border-[3px] border-mint bg-white/10 flex items-center justify-center transition-all duration-200"
+              id="pin5"
+            >
+              <div
+                class="pin-dot w-3 h-3 rounded-full bg-transparent transition-all duration-200"
+              ></div>
+            </div>
+          </div>
+        </div>
 
         <!-- Unlock Button -->
         <button
@@ -1469,7 +1526,7 @@
         const errorMsg = document.getElementById("errorMsg");
 
         // Change 'iloveyou' to whatever password you want
-        if (password.toLowerCase() === "iloveyou" || password === "143") {
+        if (password === "0715" || password === "071525") {
           lockScreen.classList.add("lock-hidden");
           setTimeout(() => {
             choiceScreen.classList.add("visible");
@@ -1477,13 +1534,21 @@
         } else {
           errorMsg.classList.add("show");
           document.getElementById("passwordInput").value = "";
-          document.getElementById("passwordInput").style.borderColor =
-            "#ff4444";
+          // Flash PIN boxes red
+          for (let i = 0; i < 6; i++) {
+            const box = document.getElementById("pin" + i);
+            box.style.borderColor = "#ff4444";
+            box.style.background = "rgba(255,68,68,0.15)";
+          }
+          syncPinDots();
 
           setTimeout(() => {
             errorMsg.classList.remove("show");
-            document.getElementById("passwordInput").style.borderColor =
-              "#98FB98";
+            for (let i = 0; i < 6; i++) {
+              const box = document.getElementById("pin" + i);
+              box.style.borderColor = "";
+              box.style.background = "";
+            }
           }, 2000);
         }
       }
@@ -1627,6 +1692,66 @@
           if (e.key === "Enter") {
             checkPassword();
           }
+        });
+
+      // Sync PIN dot boxes with hidden input
+      let pinFocused = false;
+
+      function syncPinDots() {
+        const val = document.getElementById("passwordInput").value;
+        const activeIndex = Math.min(val.length, 5);
+        for (let i = 0; i < 6; i++) {
+          const box = document.getElementById("pin" + i);
+          const dot = box.querySelector(".pin-dot");
+          if (i < val.length) {
+            // Filled dot
+            dot.style.background = "#98fb98";
+            dot.style.boxShadow = "0 0 8px rgba(152,251,152,0.8)";
+            dot.style.transform = "scale(1)";
+            box.style.borderColor = "#7fe5a5";
+            box.style.background = "rgba(152,251,152,0.12)";
+            box.style.boxShadow = "";
+          } else if (i === activeIndex && pinFocused) {
+            // Active (next to fill) — glowing highlight
+            dot.style.background = "transparent";
+            dot.style.boxShadow = "none";
+            dot.style.transform = "scale(0.4)";
+            box.style.borderColor = "#98fb98";
+            box.style.background = "rgba(152,251,152,0.08)";
+            box.style.boxShadow =
+              "0 0 0 3px rgba(152,251,152,0.35), 0 0 16px rgba(152,251,152,0.25)";
+          } else {
+            // Empty unfocused
+            dot.style.background = "transparent";
+            dot.style.boxShadow = "none";
+            dot.style.transform = "scale(0.4)";
+            box.style.borderColor = "";
+            box.style.background = "";
+            box.style.boxShadow = "";
+          }
+        }
+      }
+      syncPinDots();
+
+      // Focus/blur events to toggle active highlight
+      document
+        .getElementById("passwordInput")
+        .addEventListener("focus", function () {
+          pinFocused = true;
+          syncPinDots();
+        });
+      document
+        .getElementById("passwordInput")
+        .addEventListener("blur", function () {
+          pinFocused = false;
+          syncPinDots();
+        });
+
+      // Focus hidden input when clicking on PIN boxes
+      document
+        .getElementById("pinBoxes")
+        .addEventListener("click", function () {
+          document.getElementById("passwordInput").focus();
         });
 
       // Create floating hearts
