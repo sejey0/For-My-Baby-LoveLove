@@ -383,92 +383,6 @@
         box-shadow: 0 12px 30px rgba(152, 251, 152, 0.6);
       }
 
-      .letter-container {
-        max-width: 850px;
-        margin: 100px auto 50px;
-        background: rgba(255, 255, 255, 0.02);
-        backdrop-filter: blur(1px);
-        -webkit-backdrop-filter: blur(1px);
-        padding: 70px;
-        border-radius: 40px;
-        box-shadow: none;
-        border: 2px solid rgba(152, 251, 152, 0.15);
-        position: relative;
-        animation: fadeInUp 1s;
-      }
-
-      .letter-header {
-        text-align: center;
-        margin-bottom: 50px;
-        border-bottom: 4px solid #98fb98;
-        padding-bottom: 35px;
-        position: relative;
-      }
-
-      .letter-header::after {
-        content: "💚";
-        position: absolute;
-        bottom: -20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: transparent;
-        padding: 0 15px;
-        font-size: 30px;
-        animation: heartbeat 1.5s infinite;
-      }
-
-      .letter-header h1 {
-        color: #ffffff;
-        font-size: 46px;
-        margin-bottom: 20px;
-        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-        animation: fadeIn 1s;
-      }
-
-      .letter-header .date {
-        color: #98fb98;
-        font-size: 20px;
-        font-style: italic;
-        font-weight: bold;
-        text-shadow: 1px 1px 3px rgba(152, 251, 152, 0.3);
-      }
-
-      .letter-body {
-        color: #ffffff;
-        font-size: 19px;
-        line-height: 2;
-        text-align: justify;
-        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
-      }
-
-      .letter-body p {
-        margin-bottom: 30px;
-        animation: fadeIn 1s;
-        animation-fill-mode: both;
-      }
-
-      .letter-body p:nth-child(1) {
-        animation-delay: 0.2s;
-      }
-      .letter-body p:nth-child(2) {
-        animation-delay: 0.4s;
-      }
-      .letter-body p:nth-child(3) {
-        animation-delay: 0.6s;
-      }
-      .letter-body p:nth-child(4) {
-        animation-delay: 0.8s;
-      }
-      .letter-body p:nth-child(5) {
-        animation-delay: 1s;
-      }
-      .letter-body p:nth-child(6) {
-        animation-delay: 1.2s;
-      }
-      .letter-body p:nth-child(7) {
-        animation-delay: 1.4s;
-      }
-
       @keyframes fadeIn {
         from {
           opacity: 0;
@@ -478,58 +392,6 @@
           opacity: 1;
           transform: translateY(0);
         }
-      }
-
-      .highlight {
-        background: linear-gradient(transparent 60%, #98fb98 60%);
-        padding: 3px 5px;
-        font-weight: bold;
-        border-radius: 3px;
-      }
-
-      .signature {
-        text-align: right;
-        margin-top: 60px;
-        font-size: 26px;
-        color: #98fb98;
-        font-style: italic;
-        text-shadow: 2px 2px 4px rgba(152, 251, 152, 0.3);
-      }
-
-      .decorative-corner {
-        position: absolute;
-        width: 90px;
-        height: 90px;
-        border: 4px solid #98fb98;
-        z-index: 1;
-      }
-
-      .corner-tl {
-        top: 25px;
-        left: 25px;
-        border-right: none;
-        border-bottom: none;
-      }
-
-      .corner-tr {
-        top: 25px;
-        right: 25px;
-        border-left: none;
-        border-bottom: none;
-      }
-
-      .corner-bl {
-        bottom: 25px;
-        left: 25px;
-        border-right: none;
-        border-top: none;
-      }
-
-      .corner-br {
-        bottom: 25px;
-        right: 25px;
-        border-left: none;
-        border-top: none;
       }
 
       /* Memory Gallery */
@@ -773,36 +635,6 @@
       }
 
       /* Valentine Theme Overrides */
-      body.valentine-theme .letter-container {
-        background: rgba(255, 240, 245, 0.02);
-        backdrop-filter: blur(1px);
-        -webkit-backdrop-filter: blur(1px);
-        border-color: rgba(255, 77, 109, 0.15);
-        box-shadow: none;
-      }
-      body.valentine-theme .letter-header {
-        border-bottom-color: #ff4d6d;
-      }
-      body.valentine-theme .letter-header::after {
-        content: "💝";
-      }
-      body.valentine-theme .letter-header h1 {
-        text-shadow: 3px 3px 6px rgba(255, 77, 109, 0.2);
-      }
-      body.valentine-theme .letter-header .date {
-        color: #ff4d6d;
-        text-shadow: 1px 1px 3px rgba(255, 77, 109, 0.2);
-      }
-      body.valentine-theme .highlight {
-        background: linear-gradient(transparent 60%, #ffb8b8 60%);
-      }
-      body.valentine-theme .signature {
-        color: #ff4d6d;
-        text-shadow: 2px 2px 4px rgba(255, 77, 109, 0.2);
-      }
-      body.valentine-theme .decorative-corner {
-        border-color: #ff4d6d;
-      }
       body.valentine-theme .memory-section h2,
       body.valentine-theme .love-quotes h2 {
         text-shadow: 3px 3px 10px rgba(255, 77, 109, 0.4);
@@ -1667,82 +1499,207 @@
 
     <!-- Valentine's Content -->
     <div class="content" id="valentineContent">
-      <button class="back-button" onclick="backToChoice()">
-        ← Back to Menu
+      <!-- Back Button -->
+      <button
+        onclick="backToChoice()"
+        class="fixed top-6 left-6 z-[100] inline-flex items-center gap-2 font-bold py-3 px-6 rounded-2xl text-sm transition-all duration-300 cursor-pointer border-0"
+        style="
+          background: linear-gradient(145deg, #ffffff 0%, #fff0f5 100%);
+          box-shadow: 0 8px 20px rgba(255, 77, 109, 0.3);
+          color: #1a1a1a;
+        "
+        onmouseover="
+          this.style.background = '#ff4d6d';
+          this.style.color = 'white';
+          this.style.transform = 'translateY(-3px) scale(1.05)';
+          this.style.boxShadow = '0 12px 25px rgba(255, 77, 109, 0.5)';
+        "
+        onmouseout="
+          this.style.background =
+            'linear-gradient(145deg, #ffffff 0%, #fff0f5 100%)';
+          this.style.color = '#1a1a1a';
+          this.style.transform = 'none';
+          this.style.boxShadow = '0 8px 20px rgba(255, 77, 109, 0.3)';
+        "
+      >
+        <span class="text-lg">←</span> Back to Menu
       </button>
 
-      <div class="letter-container">
-        <div class="decorative-corner corner-tl"></div>
-        <div class="decorative-corner corner-tr"></div>
-        <div class="decorative-corner corner-bl"></div>
-        <div class="decorative-corner corner-br"></div>
+      <!-- Letter Card -->
+      <div class="relative max-w-3xl mx-auto pt-28 pb-12 px-5">
+        <div
+          class="relative rounded-[2.5rem] p-10 md:p-16 animate-[fadeInUp_1s_ease]"
+          style="
+            background: rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+            border: 2px solid rgba(255, 77, 109, 0.25);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+          "
+        >
+          <!-- Decorative Corners -->
+          <div
+            class="absolute top-5 left-5 w-16 h-16 border-t-2 border-l-2 border-pink-400/40 rounded-tl-lg"
+          ></div>
+          <div
+            class="absolute top-5 right-5 w-16 h-16 border-t-2 border-r-2 border-pink-400/40 rounded-tr-lg"
+          ></div>
+          <div
+            class="absolute bottom-5 left-5 w-16 h-16 border-b-2 border-l-2 border-pink-400/40 rounded-bl-lg"
+          ></div>
+          <div
+            class="absolute bottom-5 right-5 w-16 h-16 border-b-2 border-r-2 border-pink-400/40 rounded-br-lg"
+          ></div>
 
-        <div class="letter-header">
-          <h1>My Dearest Valentine 💝</h1>
-          <p class="date">February 14, 2026 — Happy Valentine's Day!</p>
-        </div>
+          <!-- Header -->
+          <div
+            class="text-center mb-12 pb-8 border-b-2 border-pink-400/30 relative"
+          >
+            <h1
+              class="text-white text-3xl md:text-5xl font-bold mb-4 animate-[fadeIn_1s_ease]"
+              style="
+                text-shadow:
+                  2px 2px 12px rgba(0, 0, 0, 0.8),
+                  0 0 30px rgba(255, 77, 109, 0.3);
+              "
+            >
+              My Dearest Valentine 💝
+            </h1>
+            <p
+              class="text-lg md:text-xl italic font-bold animate-[fadeIn_1.2s_ease]"
+              style="
+                color: #ff8fa3;
+                text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
+              "
+            >
+              February 14, 2026 — Happy Valentine's Day!
+            </p>
+          </div>
 
-        <div class="letter-body">
-          <p>Hello lovelove,</p>
+          <!-- Letter Body -->
+          <div
+            class="text-white text-base md:text-lg leading-loose text-justify space-y-7"
+            style="text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.9)"
+          >
+            <p class="animate-[fadeIn_1s_ease_0.2s_both]">Hello lovelove,</p>
 
-          <p>
-            Ito pala ang first valentine's day natin together, araw ng mga puso,
-            puso ko na ikaw lang po ang laman, mula no'ng naramdaman n'ya na
-            mahal kana n'ya hanggang ngayon hindi nagbago, kahit pa hindi tayo
-            minsan magkaintindihan, may mga away na nagkakasakitan,
-            <span class="highlight"
-              >ikaw lang po laging gusto sa lahat mahal</span
-            >.
-          </p>
+            <p class="animate-[fadeIn_1s_ease_0.4s_both]">
+              Ito pala ang first valentine's day natin together, araw ng mga
+              puso, puso ko na ikaw lang po ang laman, mula no'ng naramdaman
+              n'ya na mahal kana n'ya hanggang ngayon hindi nagbago, kahit pa
+              hindi tayo minsan magkaintindihan, may mga away na nagkakasakitan,
+              <span
+                class="font-bold px-1 rounded"
+                style="
+                  background: linear-gradient(
+                    transparent 55%,
+                    rgba(255, 77, 109, 0.5) 55%
+                  );
+                "
+                >ikaw lang po laging gusto sa lahat mahal</span
+              >.
+            </p>
 
-          <p>
-            Alam ko mahal marami ako nagawang hindi maganda sayo o nasabi sa
-            salita o siguro sa gawa pero mahal,
-            <span class="highlight"
-              >alam ko sa sarili ko at sana alam mo rin at ramdam mo na mahal na
-              mahal kita palagi</span
-            >, hindi man ako perfect partner o boyfriend sayo, gagawin ko lahat
-            para lang maiparamdam sayo na mahal kita, kahit na hindi mo na ako
-            maintindihan and'yan pa rin mahal.
-          </p>
+            <p class="animate-[fadeIn_1s_ease_0.6s_both]">
+              Alam ko mahal marami ako nagawang hindi maganda sayo o nasabi sa
+              salita o siguro sa gawa pero mahal,
+              <span
+                class="font-bold px-1 rounded"
+                style="
+                  background: linear-gradient(
+                    transparent 55%,
+                    rgba(255, 77, 109, 0.5) 55%
+                  );
+                "
+                >alam ko sa sarili ko at sana alam mo rin at ramdam mo na mahal
+                na mahal kita palagi</span
+              >, hindi man ako perfect partner o boyfriend sayo, gagawin ko
+              lahat para lang maiparamdam sayo na mahal kita, kahit na hindi mo
+              na ako maintindihan and'yan pa rin mahal.
+            </p>
 
-          <p>
-            Salamat sa mga pagsama at laging and'yan para sa'kin kapag nasa
-            lowest ako ng buhay ko at pag-iisip ko, para sa'kin isa ang tunay na
-            symbol ng valentine's day,
-            <span class="highlight"
-              >'yon ay pinana ni kupido ang puso ko para lang makita n'ya na
-              tama na mahalin kita at maging tayo tinadhana po talaga sayo</span
-            >, kahit minsan parang yin at yang tayo na hindi magkaintindihan at
-            iba ang opinion sa mga bagay-bagay.
-          </p>
+            <p class="animate-[fadeIn_1s_ease_0.8s_both]">
+              Salamat sa mga pagsama at laging and'yan para sa'kin kapag nasa
+              lowest ako ng buhay ko at pag-iisip ko, para sa'kin isa ang tunay
+              na symbol ng valentine's day,
+              <span
+                class="font-bold px-1 rounded"
+                style="
+                  background: linear-gradient(
+                    transparent 55%,
+                    rgba(255, 77, 109, 0.5) 55%
+                  );
+                "
+                >'yon ay pinana ni kupido ang puso ko para lang makita n'ya na
+                tama na mahalin kita at maging tayo tinadhana po talaga
+                sayo</span
+              >, kahit minsan parang yin at yang tayo na hindi magkaintindihan
+              at iba ang opinion sa mga bagay-bagay.
+            </p>
 
-          <p>
-            Basta mahal
-            <span class="highlight"
-              >ikaw ang symbol at tunay na definition ng love para sa'kin</span
-            >, masasabi ko kay Lord God na nahanap ko na at binigay n'ya kahit
-            hindi ko hinanap.
-          </p>
+            <p class="animate-[fadeIn_1s_ease_1s_both]">
+              Basta mahal
+              <span
+                class="font-bold px-1 rounded"
+                style="
+                  background: linear-gradient(
+                    transparent 55%,
+                    rgba(255, 77, 109, 0.5) 55%
+                  );
+                "
+                >ikaw ang symbol at tunay na definition ng love para
+                sa'kin</span
+              >, masasabi ko kay Lord God na nahanap ko na at binigay n'ya kahit
+              hindi ko hinanap.
+            </p>
 
-          <p>
-            Kaya lagi mo tatandaan mahal, na
-            <span class="highlight"
-              >mahal na mahal na mahal na mahal po kita</span
-            >, i love you so much lovelove and my asawa, muuuuaaaahhh.
-            💜💜💜💜😚😚😚😚♾️♾️♾️♾️
-          </p>
+            <p class="animate-[fadeIn_1s_ease_1.2s_both]">
+              Kaya lagi mo tatandaan mahal, na
+              <span
+                class="font-bold px-1 rounded"
+                style="
+                  background: linear-gradient(
+                    transparent 55%,
+                    rgba(255, 77, 109, 0.5) 55%
+                  );
+                "
+                >mahal na mahal na mahal na mahal po kita</span
+              >, i love you so much lovelove and my asawa, muuuuaaaahhh.
+              💜💜💜💜😚😚😚😚♾️♾️♾️♾️
+            </p>
 
-          <div class="signature">
-            Forever and Always Yours,<br />
-            CJay 💝
+            <!-- Signature -->
+            <div
+              class="text-right mt-14 text-2xl italic animate-[fadeIn_1s_ease_1.4s_both]"
+              style="
+                color: #ff8fa3;
+                text-shadow: 2px 2px 8px rgba(255, 77, 109, 0.4);
+              "
+            >
+              Forever and Always Yours,<br />
+              CJay 💝
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="footer">
-        <div class="footer-heart">💝</div>
-        <p>You Are My Forever Valentine</p>
+      <!-- Footer -->
+      <div class="text-center py-14 px-5">
+        <div
+          class="text-6xl animate-[heartbeat_1.5s_infinite]"
+          style="filter: drop-shadow(0 5px 15px rgba(255, 77, 109, 0.5))"
+        >
+          💝
+        </div>
+        <p
+          class="mt-6 text-2xl md:text-3xl font-bold"
+          style="
+            color: #ff8fa3;
+            text-shadow: 2px 2px 10px rgba(255, 77, 109, 0.5);
+          "
+        >
+          You Are My Forever Valentine
+        </p>
       </div>
     </div>
 
