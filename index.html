@@ -920,6 +920,120 @@
           font-size: 11px;
         }
       }
+
+      /* ── Memory Carousel ── */
+      .memory-carousel-wrapper {
+        position: relative;
+        overflow: hidden;
+        border-radius: 1.5rem;
+        padding: 12px 0;
+      }
+      .memory-carousel-wrapper::before,
+      .memory-carousel-wrapper::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 60px;
+        z-index: 2;
+        pointer-events: none;
+      }
+      .memory-carousel-wrapper::before {
+        left: 0;
+        background: linear-gradient(to right, #1a1a1a, transparent);
+      }
+      .memory-carousel-wrapper::after {
+        right: 0;
+        background: linear-gradient(to left, #1a1a1a, transparent);
+      }
+      .memory-carousel-track {
+        display: flex;
+        gap: 16px;
+        animation: carouselScroll 60s linear infinite;
+        width: max-content;
+      }
+      .memory-carousel-wrapper:hover .memory-carousel-track {
+        animation-play-state: paused;
+      }
+      .memory-carousel-track img {
+        width: 200px;
+        height: 260px;
+        object-fit: cover;
+        border-radius: 1rem;
+        border: 2px solid rgba(152, 251, 152, 0.15);
+        cursor: pointer;
+        transition:
+          transform 0.3s ease,
+          border-color 0.3s ease,
+          box-shadow 0.3s ease;
+        flex-shrink: 0;
+      }
+      .memory-carousel-track img:hover {
+        transform: scale(1.08);
+        border-color: rgba(152, 251, 152, 0.6);
+        box-shadow: 0 12px 40px rgba(152, 251, 152, 0.25);
+        z-index: 3;
+        position: relative;
+      }
+      @keyframes carouselScroll {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* ── Lightbox ── */
+      .memory-lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: rgba(0, 0, 0, 0.92);
+        backdrop-filter: blur(10px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.3s ease,
+          visibility 0.3s ease;
+        cursor: pointer;
+      }
+      .memory-lightbox.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .memory-lightbox img {
+        max-width: 90vw;
+        max-height: 90vh;
+        object-fit: contain;
+        border-radius: 1rem;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+      }
+      .memory-lightbox.active img {
+        transform: scale(1);
+      }
+      .memory-lightbox-close {
+        position: absolute;
+        top: 20px;
+        right: 28px;
+        color: white;
+        font-size: 36px;
+        cursor: pointer;
+        opacity: 0.7;
+        transition: opacity 0.2s;
+        z-index: 10000;
+        background: none;
+        border: none;
+        font-family: inherit;
+      }
+      .memory-lightbox-close:hover {
+        opacity: 1;
+      }
     </style>
   </head>
   <body>
@@ -2220,243 +2334,194 @@
             </h2>
           </div>
 
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <div
-              class="group relative rounded-2xl p-6 text-center overflow-hidden transition-all duration-400 cursor-default"
-              style="
-                background: rgba(255, 255, 255, 0.06);
-                border: 1px solid rgba(255, 255, 255, 0.12);
-                backdrop-filter: blur(10px);
-              "
-              onmouseover="
-                this.style.transform = 'translateY(-8px) rotate(-2deg)';
-                this.style.boxShadow = '0 20px 40px rgba(152,251,152,0.2)';
-                this.style.borderColor = 'rgba(152,251,152,0.4)';
-              "
-              onmouseout="
-                this.style.transform = '';
-                this.style.boxShadow = '';
-                this.style.borderColor = 'rgba(255,255,255,0.12)';
-              "
-            >
-              <div
-                class="text-4xl mb-3"
-                style="filter: drop-shadow(0 3px 10px rgba(152, 251, 152, 0.4))"
-              >
-                🌅
-              </div>
-              <h3 class="font-bold text-sm text-white mb-1">First Dates</h3>
-              <p class="text-xs" style="color: rgba(255, 255, 255, 0.5)">
-                The start of us
-              </p>
-            </div>
-
-            <div
-              class="group relative rounded-2xl p-6 text-center overflow-hidden transition-all duration-400 cursor-default"
-              style="
-                background: rgba(255, 255, 255, 0.06);
-                border: 1px solid rgba(255, 255, 255, 0.12);
-                backdrop-filter: blur(10px);
-              "
-              onmouseover="
-                this.style.transform = 'translateY(-8px) rotate(2deg)';
-                this.style.boxShadow = '0 20px 40px rgba(152,251,152,0.2)';
-                this.style.borderColor = 'rgba(152,251,152,0.4)';
-              "
-              onmouseout="
-                this.style.transform = '';
-                this.style.boxShadow = '';
-                this.style.borderColor = 'rgba(255,255,255,0.12)';
-              "
-            >
-              <div
-                class="text-4xl mb-3"
-                style="filter: drop-shadow(0 3px 10px rgba(152, 251, 152, 0.4))"
-              >
-                🍜
-              </div>
-              <h3 class="font-bold text-sm text-white mb-1">Shared Meals</h3>
-              <p class="text-xs" style="color: rgba(255, 255, 255, 0.5)">
-                Every bite together
-              </p>
-            </div>
-
-            <div
-              class="group relative rounded-2xl p-6 text-center overflow-hidden transition-all duration-400 cursor-default"
-              style="
-                background: rgba(255, 255, 255, 0.06);
-                border: 1px solid rgba(255, 255, 255, 0.12);
-                backdrop-filter: blur(10px);
-              "
-              onmouseover="
-                this.style.transform = 'translateY(-8px) rotate(-2deg)';
-                this.style.boxShadow = '0 20px 40px rgba(152,251,152,0.2)';
-                this.style.borderColor = 'rgba(152,251,152,0.4)';
-              "
-              onmouseout="
-                this.style.transform = '';
-                this.style.boxShadow = '';
-                this.style.borderColor = 'rgba(255,255,255,0.12)';
-              "
-            >
-              <div
-                class="text-4xl mb-3"
-                style="filter: drop-shadow(0 3px 10px rgba(152, 251, 152, 0.4))"
-              >
-                🌙
-              </div>
-              <h3 class="font-bold text-sm text-white mb-1">Late Nights</h3>
-              <p class="text-xs" style="color: rgba(255, 255, 255, 0.5)">
-                Talks til sunrise
-              </p>
-            </div>
-
-            <div
-              class="group relative rounded-2xl p-6 text-center overflow-hidden transition-all duration-400 cursor-default"
-              style="
-                background: rgba(255, 255, 255, 0.06);
-                border: 1px solid rgba(255, 255, 255, 0.12);
-                backdrop-filter: blur(10px);
-              "
-              onmouseover="
-                this.style.transform = 'translateY(-8px) rotate(2deg)';
-                this.style.boxShadow = '0 20px 40px rgba(152,251,152,0.2)';
-                this.style.borderColor = 'rgba(152,251,152,0.4)';
-              "
-              onmouseout="
-                this.style.transform = '';
-                this.style.boxShadow = '';
-                this.style.borderColor = 'rgba(255,255,255,0.12)';
-              "
-            >
-              <div
-                class="text-4xl mb-3"
-                style="filter: drop-shadow(0 3px 10px rgba(152, 251, 152, 0.4))"
-              >
-                🤝
-              </div>
-              <h3 class="font-bold text-sm text-white mb-1">Hand in Hand</h3>
-              <p class="text-xs" style="color: rgba(255, 255, 255, 0.5)">
-                Walks with you
-              </p>
-            </div>
-
-            <div
-              class="group relative rounded-2xl p-6 text-center overflow-hidden transition-all duration-400 cursor-default"
-              style="
-                background: rgba(255, 255, 255, 0.06);
-                border: 1px solid rgba(255, 255, 255, 0.12);
-                backdrop-filter: blur(10px);
-              "
-              onmouseover="
-                this.style.transform = 'translateY(-8px) rotate(-2deg)';
-                this.style.boxShadow = '0 20px 40px rgba(152,251,152,0.2)';
-                this.style.borderColor = 'rgba(152,251,152,0.4)';
-              "
-              onmouseout="
-                this.style.transform = '';
-                this.style.boxShadow = '';
-                this.style.borderColor = 'rgba(255,255,255,0.12)';
-              "
-            >
-              <div
-                class="text-4xl mb-3"
-                style="filter: drop-shadow(0 3px 10px rgba(152, 251, 152, 0.4))"
-              >
-                😂
-              </div>
-              <h3 class="font-bold text-sm text-white mb-1">Silly Moments</h3>
-              <p class="text-xs" style="color: rgba(255, 255, 255, 0.5)">
-                Our inside jokes
-              </p>
-            </div>
-
-            <div
-              class="group relative rounded-2xl p-6 text-center overflow-hidden transition-all duration-400 cursor-default"
-              style="
-                background: rgba(255, 255, 255, 0.06);
-                border: 1px solid rgba(255, 255, 255, 0.12);
-                backdrop-filter: blur(10px);
-              "
-              onmouseover="
-                this.style.transform = 'translateY(-8px) rotate(2deg)';
-                this.style.boxShadow = '0 20px 40px rgba(152,251,152,0.2)';
-                this.style.borderColor = 'rgba(152,251,152,0.4)';
-              "
-              onmouseout="
-                this.style.transform = '';
-                this.style.boxShadow = '';
-                this.style.borderColor = 'rgba(255,255,255,0.12)';
-              "
-            >
-              <div
-                class="text-4xl mb-3"
-                style="filter: drop-shadow(0 3px 10px rgba(152, 251, 152, 0.4))"
-              >
-                🌧️
-              </div>
-              <h3 class="font-bold text-sm text-white mb-1">Rainy Days</h3>
-              <p class="text-xs" style="color: rgba(255, 255, 255, 0.5)">
-                Cozy with you
-              </p>
-            </div>
-
-            <div
-              class="group relative rounded-2xl p-6 text-center overflow-hidden transition-all duration-400 cursor-default"
-              style="
-                background: rgba(255, 255, 255, 0.06);
-                border: 1px solid rgba(255, 255, 255, 0.12);
-                backdrop-filter: blur(10px);
-              "
-              onmouseover="
-                this.style.transform = 'translateY(-8px) rotate(-2deg)';
-                this.style.boxShadow = '0 20px 40px rgba(152,251,152,0.2)';
-                this.style.borderColor = 'rgba(152,251,152,0.4)';
-              "
-              onmouseout="
-                this.style.transform = '';
-                this.style.boxShadow = '';
-                this.style.borderColor = 'rgba(255,255,255,0.12)';
-              "
-            >
-              <div
-                class="text-4xl mb-3"
-                style="filter: drop-shadow(0 3px 10px rgba(152, 251, 152, 0.4))"
-              >
-                💌
-              </div>
-              <h3 class="font-bold text-sm text-white mb-1">Love Messages</h3>
-              <p class="text-xs" style="color: rgba(255, 255, 255, 0.5)">
-                Every good morning
-              </p>
-            </div>
-
-            <div
-              class="group relative rounded-2xl p-6 text-center overflow-hidden transition-all duration-400 cursor-default"
-              style="
-                background: rgba(152, 251, 152, 0.07);
-                border: 1px solid rgba(152, 251, 152, 0.25);
-                backdrop-filter: blur(10px);
-              "
-              onmouseover="
-                this.style.transform = 'translateY(-8px) rotate(2deg)';
-                this.style.boxShadow = '0 20px 40px rgba(152,251,152,0.25)';
-                this.style.borderColor = 'rgba(152,251,152,0.5)';
-              "
-              onmouseout="
-                this.style.transform = '';
-                this.style.boxShadow = '';
-                this.style.borderColor = 'rgba(152,251,152,0.25)';
-              "
-            >
-              <div
-                class="text-4xl mb-3"
-                style="filter: drop-shadow(0 3px 10px rgba(152, 251, 152, 0.4))"
-              >
-                ♾️
-              </div>
-              <h3 class="font-bold text-sm text-white mb-1">Forever</h3>
-              <p class="text-xs" style="color: #98fb98">And still counting…</p>
+          <!-- Photo Carousel -->
+          <div class="memory-carousel-wrapper">
+            <div class="memory-carousel-track" id="memoryCarouselTrack">
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20250811_171107_439.jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20250811_171110_307.jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20250811_171117_133.jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251014_150357_935%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251014_150413_750%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251014_150416_176.jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251014_173016_525.jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251014_173018_667.jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251014_173238_590.jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251014_173241_118.jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251014_173253_731%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251015_105151_904%20(1)%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251015_105156_781%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251015_110430_401%20(1)%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251015_110432_268%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251015_163731_652%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251015_164306_427%20(1)%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251015_164308_360%20(1)%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251015_164458_863%20(1)%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251015_164500_235%20(1)%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251015_164536_766%20(1)%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251015_164542_689%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251015_165640_604%20(1)%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251015_165647_894%20(1)%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251015_165654_237%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251015_165713_247%20(1)%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251015_165847_381%20(1)%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251015_165908_471%20(1)%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251015_170043_667%20(1)%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251015_170052_999%20(1)%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251016_113344_407%20(1)%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251016_113348_177%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251016_172452_850%20(1)%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251016_172747_767%20(1)%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251016_172844_150%20(1)%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251016_174927_514%20(1)%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
+              <img
+                src="assets/images/our%20sweet%20memories/IMG_20251016_174931_298%20(1).jpg"
+                alt="Sweet memory"
+                onclick="openMemoryLightbox(this.src)"
+              />
             </div>
           </div>
         </div>
@@ -2859,6 +2924,46 @@
       for (let i = 0; i < 20; i++) {
         setTimeout(createSparkle, i * 100);
       }
+
+      // ── Memory Carousel: duplicate images for seamless loop ──
+      (function () {
+        const track = document.getElementById("memoryCarouselTrack");
+        if (track) {
+          const images = track.innerHTML;
+          track.innerHTML = images + images;
+        }
+      })();
+
+      // ── Memory Lightbox ──
+      function openMemoryLightbox(src) {
+        const lb = document.getElementById("memoryLightbox");
+        const img = document.getElementById("memoryLightboxImg");
+        img.src = src;
+        lb.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+      function closeMemoryLightbox() {
+        const lb = document.getElementById("memoryLightbox");
+        lb.classList.remove("active");
+        document.body.style.overflow = "";
+      }
     </script>
+
+    <!-- Memory Lightbox Overlay -->
+    <div
+      class="memory-lightbox"
+      id="memoryLightbox"
+      onclick="closeMemoryLightbox()"
+    >
+      <button class="memory-lightbox-close" onclick="closeMemoryLightbox()">
+        &times;
+      </button>
+      <img
+        id="memoryLightboxImg"
+        src=""
+        alt="Memory full view"
+        onclick="event.stopPropagation()"
+      />
+    </div>
   </body>
 </html>
