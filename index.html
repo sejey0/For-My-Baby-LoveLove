@@ -291,6 +291,7 @@
         z-index: 999;
         opacity: 0;
         visibility: hidden;
+        overflow: hidden;
         transition:
           opacity 0.5s,
           visibility 0.5s;
@@ -1163,6 +1164,52 @@
 
     <!-- Choice Screen -->
     <div class="choice-screen" id="choiceScreen">
+      <!-- Background SVG images -->
+      <img
+        src="assets/images/1.svg"
+        alt=""
+        class="absolute pointer-events-none"
+        style="
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          height: 90vh;
+          width: auto;
+          object-fit: contain;
+          opacity: 0.35;
+          filter: drop-shadow(0 0 30px rgba(152, 251, 152, 0.4));
+        "
+      />
+      <img
+        src="assets/images/2.svg"
+        alt=""
+        class="absolute pointer-events-none"
+        style="
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          height: 90vh;
+          width: auto;
+          object-fit: contain;
+          opacity: 0.35;
+          filter: drop-shadow(0 0 30px rgba(152, 251, 152, 0.4));
+        "
+      />
+      <img
+        src="assets/images/3.svg"
+        alt=""
+        class="absolute pointer-events-none"
+        style="
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          height: 90vh;
+          width: auto;
+          object-fit: contain;
+          opacity: 0.2;
+          filter: drop-shadow(0 0 30px rgba(152, 251, 152, 0.4));
+        "
+      />
       <!-- Ambient glow blobs -->
       <div
         class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full pointer-events-none"
